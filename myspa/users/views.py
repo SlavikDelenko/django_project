@@ -44,9 +44,11 @@ def add_users(request):
             users_data_list = []
 
         for user_data in users_data_list:
-            user_form = UserForm(user_data)
-            if user_form.is_valid():
-                user_form.save()
+
+            if isinstance(user_data, dict):
+                user_form = UserForm(user_data)
+                if user_form.is_valid():
+                    user_form.save()
 
         return redirect('user_list')
 
